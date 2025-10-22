@@ -1,0 +1,35 @@
+﻿@model MVC.Models.TheModel
+
+<div>
+    <form asp-action="Index" method="post">
+        <label asp-for="Phrase">Phrase:</label>
+        <input asp-for="Phrase" type="text" />
+        <small style="color:red"><span asp-validation-for="Phrase"></span></small>
+        <br />
+        <input type="submit" value="Count" />
+    </form>
+</div>
+
+<hr />
+
+<div>
+@{
+    if (ViewBag.Valid)
+    {
+        <div><b>Counts:</b></div>
+        <ul>
+            @foreach (var count in Model.Counts!)
+            {
+                <li>'@count.Key': @count.Value</li>
+            }
+        </ul>
+
+        <div><b>Lower case:</b> @Model.Lower</div>
+        <div><b>Upper case:</b> @Model.Upper</div>
+    }
+    else if (!ViewData.ModelState.IsValid)
+    {
+        <span style="color:red">Check errors!</span>
+    }
+}
+</div>
